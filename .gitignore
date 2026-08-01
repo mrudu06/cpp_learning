@@ -1,0 +1,9 @@
+# Object files
+*.o
+
+# Precompiled headers
+*.gch
+
+# Executables
+listex
+main

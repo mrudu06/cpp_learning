@@ -1,24 +1,24 @@
 # Compiler and compiler flags
-CC = gcc
-CFLAGS = -Wall -Wextra -g
+CXX = g++
+CXXFLAGS = -Wall -Wextra -std=c++17 -g
 
 # Target executable name
-TARGET = main
+TARGET = listex
 
 # Source and object files
-SRCS = main.c linkedlist.c
-OBJS = $(SRCS:.c=.o)
+SRCS = main.cpp linkedlist.cpp
+OBJS = $(SRCS:.cpp=.o)
 
 # Default target
 all: $(TARGET)
 
 # Link object files to create executable
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 # Compile source files to object files (they all depend on linkedlist.h)
-%.o: %.c linkedlist.h
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cpp linkedlist.h
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean target to remove compiled binaries and object files
 clean:
