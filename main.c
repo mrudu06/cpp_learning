@@ -4,6 +4,10 @@ int main()
 {
     int c = -1;
     int n = 0;
+    
+
+    list* l = create_list();
+
 
     while (c != 0)
     {
@@ -17,7 +21,7 @@ int main()
             case 1:
                 printf("Enter the value to add: ");
                 if (scanf("%d", &n) == 1) {
-                    add_node(n);
+                    add_node(list* l, n);
                 }
                 break;
 
@@ -28,7 +32,7 @@ int main()
             case 3:
                 printf("Enter the value to remove: ");
                 if (scanf("%d", &n) == 1) {
-                    remove_node(n);
+                    remove_node(list* l,n);
                 }
                 break;
                 
@@ -43,4 +47,4 @@ int main()
     }
     
     return 0;
-}
+}

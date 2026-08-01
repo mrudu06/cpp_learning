@@ -1,20 +1,27 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 struct node{
     int data;
     struct node* next;
 };
 
-extern struct node* head;
-extern struct node* tail;
+struct linked_list{
+    struct node* head;
+    struct node* tail;
+};
 
-struct node* creat_node(int n);
-void add_node(int n);
-void display_list();
-void remove_node(int n);
+typedef struct linked_list list;
+
+
+struct linked_list* create_list();
+void add_node(list* l,int n);
+void display_list(list* l);
+void remove_node(list* l,int n);
 
 #endif

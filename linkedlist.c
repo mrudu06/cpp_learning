@@ -1,7 +1,8 @@
 #include "linkedlist.h"
+#include <string.h>
 
-struct node* head = NULL;
-struct node* tail = NULL;
+//struct node* head = NULL;
+//struct node* tail = NULL;
 
 struct node* creat_node(int n)
 {
@@ -15,22 +16,22 @@ struct node* creat_node(int n)
     return newNode;
 }
 
-void add_node(int n)
+void add_node(list* l,int n)
 {
     struct node* newNode = creat_node(n);
-    if (head == NULL){
-        head = newNode;
-        tail = newNode;
+    if (l->head == NULL){
+        l->head = newNode;
+        l->tail = newNode;
     }
     else{
-        tail->next = newNode;
-        tail = newNode;
+        l->tail->next = newNode;
+        l->tail = newNode;
     }
 }
 
-void remove_node(int n)
+void remove_node(list* l,int n)
 {
-    struct node* current = head;
+    struct node* current = l->head;
     struct node* prev = NULL;
     while(current != NULL)
     {
@@ -38,16 +39,16 @@ void remove_node(int n)
         {
             if(prev == NULL)
             {
-                head = current->next;
-                if (head == NULL) {
-                    tail = NULL;
+                l->head = current->next;
+                if (l->head == NULL) {
+                    l->tail = NULL;
                 }
             }
             else
             {
                 prev->next = current->next;
-                if (current == tail) {
-                    tail = prev;
+                if (current == l->tail) {
+                    l->tail = prev;
                 }
             }
             free(current);
@@ -58,13 +59,19 @@ void remove_node(int n)
     }
 }
 
-void display_list()
+void display_list(list* l)
 {
-    struct node* current = head;
+    struct node* current = l->head;
     printf("Elements in the current linked list are: ");
     while(current != NULL){
         printf("%d->",current->data);
         current = current->next;
     }
     printf("NULL\n");
+}
+
+struct linked_list* create_list()
+{
+    struct linked_list* newlist = (struct linked_list*)malloc(sizeof(struct linked_list));
+    return linked_list*;
 }
