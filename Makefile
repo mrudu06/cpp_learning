@@ -1,27 +1,28 @@
-# Compiler and compiler flags
+# Compilers
 CC = gcc
+CXX = g++
+
+# Compiler flags
 CFLAGS = -Wall -Wextra -g
+CXXFLAGS = -Wall -Wextra -std=c++17 -g
 
-# Target executable name
-TARGET = main
+# Target names
+LINKEDLIST_TARGET = linkedlist_prog
+QUEUE_TARGET = queue_prog
 
-# Source and object files
-SRCS = main.c linkedlist.c
-OBJS = $(SRCS:.c=.o)
+# Default target builds both programs
+all: $(LINKEDLIST_TARGET) $(QUEUE_TARGET)
 
-# Default target
-all: $(TARGET)
+# Build linkedlist program (C)
+$(LINKEDLIST_TARGET): linkedlist/main.c linkedlist/linkedlist.c linkedlist/linkedlist.h
+	$(CC) $(CFLAGS) -o $(LINKEDLIST_TARGET) linkedlist/main.c linkedlist/linkedlist.c
 
-# Link object files to create executable
-$(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+# Build queue program (C++)
+$(QUEUE_TARGET): queue/main.cpp queue/queue.cpp queue/queue.h
+	$(CXX) $(CXXFLAGS) -o $(QUEUE_TARGET) queue/main.cpp queue/queue.cpp
 
-# Compile source files to object files (they all depend on linkedlist.h)
-%.o: %.c linkedlist.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Clean target to remove compiled binaries and object files
+# Clean target to remove compiled executables
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(LINKEDLIST_TARGET) $(QUEUE_TARGET)
 
 .PHONY: all clean
