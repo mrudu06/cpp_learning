@@ -3,26 +3,26 @@ CC = gcc
 CXX = g++
 
 # Compiler flags
+# -Ilinkedlist and -Iqueue allow the compiler to find the headers automatically
 CFLAGS = -Wall -Wextra -g
-CXXFLAGS = -Wall -Wextra -std=c++17 -g
+CXXFLAGS = -Wall -Wextra -std=c++17 -g -Ilinkedlist -Iqueue
 
-# Target names
-LINKEDLIST_TARGET = linkedlist_prog
-QUEUE_TARGET = queue_prog
+# Target name
+TARGET = queue_ll_prog
 
-# Default target builds both programs
-all: $(LINKEDLIST_TARGET) $(QUEUE_TARGET)
+# Default target
+all: $(TARGET)
 
-# Build linkedlist program (C)
-$(LINKEDLIST_TARGET): linkedlist/main.c linkedlist/linkedlist.c linkedlist/linkedlist.h
-	$(CC) $(CFLAGS) -o $(LINKEDLIST_TARGET) linkedlist/main.c linkedlist/linkedlist.c
+# 1. Compile the C linked list into an object file (.o)
+linkedlist/linkedlist.o: linkedlist/linkedlist.c linkedlist/linkedlist.h
+	$(CXX) $(CXXFLAGS) -c -o linkedlist/linkedlist.o linkedlist/linkedlist.c
 
-# Build queue program (C++)
-$(QUEUE_TARGET): queue/main.cpp queue/queue.cpp queue/queue.h
-	$(CXX) $(CXXFLAGS) -o $(QUEUE_TARGET) queue/main.cpp queue/queue.cpp
+# 2. Compile and link your C++ queue program with the linked list object
+$(TARGET): queue/main_queue.cpp linkedlist/linkedlist.o
+	$(CXX) $(CXXFLAGS) -o $(TARGET) queue/main_queue.cpp linkedlist/linkedlist.o
 
-# Clean target to remove compiled executables
+# Clean target to remove compiled files
 clean:
-	rm -f $(LINKEDLIST_TARGET) $(QUEUE_TARGET)
+	rm -f $(TARGET) linkedlist/linkedlist.o
 
 .PHONY: all clean

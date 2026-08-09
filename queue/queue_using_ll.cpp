@@ -36,14 +36,8 @@ class queue{
             throw 
             std::underflow_error("queue empty");
         }
-        struct node* temp = l->head; 
-        l->head = l->head->next;
-        if (l-> head == nullptr)
-        {
-            l->tail = nullptr;  
-        }
-        free(temp);
-        count--;
+        remove_node(l,l->head->data);
+        count --;
       
     }
 
