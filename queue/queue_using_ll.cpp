@@ -6,63 +6,53 @@ class queue{
     private:
     
     list* l;
-    int count;
 
     public:
     queue(){
-        l = create_list();
-        count = 0;
-        if (l == nullptr)
-        {
-            throw
-            std::runtime_error("No memory for the list");
+        try {
+            l = create_list();
+        } catch (const std::exception& e) {
+            throw std::runtime_error("No memory for the queue");
         }
-
     }
+
     ~queue(){
         clear();
+        free(l);
     }
+
     void push (int n)
     {
         add_node(l,n);
-        count++;
-    
     }
 
     void pop()
     {
-        if (l->head == nullptr)
-        {
-            throw 
-            std::underflow_error("queue empty");
+        if (l->size() == 0) {
+            throw std::underflow_error("queue empty");
         }
-        remove_node(l,l->head->data);
-        count --;
-      
+        l->remove_front();
     }
 
     void display() const{
-        if (l->head == nullptr)
-        {throw 
-        std::underflow_error("queue empty");}
-        display_list(l);
+        if (l->size() == 0) {
+            throw std::underflow_error("queue empty");
+        }
+        l->display();
     }
 
     void clear(){
-        while (l->head != nullptr)
+        while (l->size() > 0)
         {
             pop();
         }
     }
 
-    int peek()
-    const{
-        if (l->head == nullptr)
-        {
+    int peek() const{
+        if (l->size() == 0) {
             throw std::underflow_error("Queue empty");
         }
-        return l->head->data;
-        
+        return l->get_front();
     }
 
-};
+};

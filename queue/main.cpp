@@ -8,7 +8,7 @@ int main() {
     int value = 0;
 
     while (choice != 0) {
-        std::cout << "1. Enqueue\n";
+        std::cout << "1. Enqueue\n"; 
         std::cout << "2. Dequeue\n";
         std::cout << "3. Peek\n";
         std::cout << "4. Display Queue\n";

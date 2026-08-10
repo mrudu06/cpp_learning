@@ -2,11 +2,11 @@
 #include <iostream>
 #include <stdexcept>
 
-Queue::Queue() : frontn(nullptr), rearn(nullptr), queuesize(0) {}
+Queue::Queue() : frontn(nullptr), rearn(nullptr), queuesize(0) {} // change the enqueue to push pop rear front
 
 Queue::~Queue() {
     clear();
-}
+} 
 
 void Queue::enqueue(int val) {
     Node* newnode = new Node(val);
@@ -16,13 +16,13 @@ void Queue::enqueue(int val) {
         rearn->next = newnode;
         rearn = newnode;
     }
-    queuesize++;
-    std::cout << "Successfully enqueued " << val << " into the queue.\n";
+    queuesize++;//queue ize as count
+    std::cout << "Successfully enqueued " << val << " into the queue.\n";//remove cout
 }
 
 void Queue::dequeue() {
     if (frontn == nullptr) {
-        std::cout << "Queue Underflow! Cannot dequeue from an empty queue.\n";
+        std::cout << "Queue Underflow! Cannot dequeue from an empty queue.\n";//throw an exception
         return;
     }
     Node* temp = frontn;
@@ -71,3 +71,7 @@ void Queue::clear() {
     rearn = nullptr;
     queuesize = 0;
 }
+
+
+//list using queue 
+//use the linkedlist in this queue
